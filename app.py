@@ -28,7 +28,7 @@ def index():
 
     # Mengonversi waktu ke zona waktu baru
     originalTimezone = original_timezone.localize(current_time)
-    timeNow = current_time.astimezone(new_timezone)
+    timeNow = originalTimezone.astimezone(new_timezone)
 
     datas = {
         # Mendapatkan alamat IP pengguna
