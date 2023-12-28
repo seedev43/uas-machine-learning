@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>ML UAS ~ {% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/images/favicon.ico') }}">
+
+    <!-- DataTables -->
+    <link href="{{ url_for('static', filename='assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}"
+        rel="stylesheet" type="text/css" />
+    <link
+        href="{{ url_for('static', filename='assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}"
+        rel="stylesheet" type="text/css" />
+
+    <!-- Bootstrap Css -->
+    <link href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet"
+        type="text/css" />
+    <!-- Icons Css -->
+    <link href="{{ url_for('static', filename='assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+
+    <!-- optional fa icon new version -->
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
+
+    <!-- App Css-->
+    <link href="{{ url_for('static', filename='assets/css/app.min.css') }}" id="app-style" rel="stylesheet"
+        type="text/css" />
+
+</head>
+
+<body data-sidebar="dark">
+
+    <!-- <body data-layout="horizontal" data-topbar="dark"> -->
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <div class="d-flex">
+                    <!-- LOGO -->
+                    <div class="navbar-brand-box">
+                        <a href="/" class="logo logo-dark">
+                            <span class="logo-sm">
+                                <img src="{{ url_for('static', filename='assets/images/logo.svg') }}" alt=""
+                                    height="22">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="{{ url_for('static', filename='assets/images/logo-dark.png') }}" alt=""
+                                    height="17">
+                            </span>
+                        </a>
+
+                        <a href="/" class="logo logo-light">
+                            <span class="logo-sm">
+                                <img src="{{ url_for('static', filename='assets/images/logo-light.svg') }}" alt=""
+                                    height="22">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="{{ url_for('static', filename='assets/images/logo-light.png') }}" alt=""
+                                    height="19">
+                            </span>
+                        </a>
+                    </div>
+
+                    <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect"
+                        id="vertical-menu-btn">
+                        <i class="fa fa-fw fa-bars"></i>
+                    </button>
+
+
+
+
+                </div>
+
+                <div class="d-flex">
+
+                    <div class="dropdown d-inline-block d-lg-none ms-2">
+                        <button type="button" class="btn header-item noti-icon waves-effect"
+                            id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <i class="mdi mdi-magnify"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+                            aria-labelledby="page-header-search-dropdown">
+
+                            <form class="p-3">
+                                <div class="form-group m-0">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search ..."
+                                            aria-label="Recipient's username">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="submit"><i
+                                                    class="mdi mdi-magnify"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item noti-icon waves-effect"
+                            id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <i class="bx bx-bell bx-tada"></i>
+                            <span class="badge bg-danger rounded-pill">1</span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+                            aria-labelledby="page-header-notifications-dropdown">
+                            <div class="p-3">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h6 class="m-0" key="t-notifications"> Notifications </h6>
+                                    </div>
+                                    <div class="col-auto">
+                                        <a href="#!" class="small" key="t-view-all"> View All</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-simplebar style="max-height: 230px;">
+                                <a href="javascript: void(0);" class="text-reset notification-item">
+                                    <div class="d-flex">
+                                        <div class="avatar-xs me-3">
+                                            <span class="avatar-title bg-primary rounded-circle font-size-16">
+                                                <i class="fa-solid fa-gear-code"></i>
+                                            </span>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1" key="t-your-order">Admin</h6>
+                                            <div class="font-size-12 text-muted">
+                                                <p class="mb-1" key="t-grammer">Welcome to our site!</p>
+                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span
+                                                        key="t-min-ago">now</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </div>
+                            <div class="p-2 border-top d-grid">
+                                <a class="btn btn-sm btn-link font-size-14 text-center" href="javascript:void(0)">
+                                    <i class="mdi mdi-arrow-right-circle me-1"></i> <span key="t-view-more">View
+                                        More..</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="rounded-circle header-profile-user"
+                                src="{{ url_for('static', filename='assets/images/users/avv.jpg') }}"
+                                alt="Header Avatar">
+                            <span class="d-none d-xl-inline-block ms-1" key="t-henry">Admin</span>
+                            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <!-- item-->
+                            <a class="dropdown-item d-block" href="#"><span
+                                    class="badge bg-success float-end">11</span><i
+                                    class="bx bx-wrench font-size-16 align-middle me-1"></i> <span
+                                    key="t-settings">Settings</span></a>
+                            <div class="dropdown-divider"></div>
+                            <form method="POST" action="">
+
+                                <button class="dropdown-item text-danger"><i
+                                        class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span
+                                        key="t-logout">Logout</span></button>
+                            </form>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </header>
+        {% include 'layouts/sidebar.html' %}
+
+        {% block content %}{% endblock %}
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script> © Skote.
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-end d-none d-sm-block">
+                            Design & Develop by Kelompok 2
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+
+
+
+
+    <!-- JAVASCRIPT -->
+    <script src="{{ url_for('static', filename='assets/libs/jquery/jquery.min.js') }}"></script>
+    <script>
+        function generateRandomNumber() {
+            var formInputs = document.getElementById('myForm').elements;
+
+            // Iterasi melalui semua elemen input
+            for (var i = 0; i < formInputs.length; i++) {
+                // Jika elemen input adalah elemen text
+                if (formInputs[i].type === 'number') {
+                    // Menghasilkan angka acak antara 0 dan 1 dengan maksimal 3 digit dibelakang koma
+                    var randomNumber = Math.random().toFixed(3);
+
+                    // Memasukkan angka ke dalam input
+                    formInputs[i].value = randomNumber;
+                }
+            }
+        }
+    </script>
+    <script src="{{ url_for('static', filename='assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/libs/metismenu/metisMenu.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/libs/node-waves/waves.min.js') }}"></script>
+
+    <!-- apexcharts -->
+    <script src="{{ url_for('static', filename='assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+
+    <!-- dashboard init -->
+    <script src="{{ url_for('static', filename='assets/js/pages/dashboard.init.js') }}"></script>
+
+    <!-- Required datatable js -->
+    <script src="{{ url_for('static', filename='assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script
+        src="{{ url_for('static', filename='assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <!-- Buttons examples -->
+    <script
+        src="{{ url_for('static', filename='assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script
+        src="{{ url_for('static', filename='assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
+
+    <!-- Responsive examples -->
+    <script
+        src="{{ url_for('static', filename='assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script
+        src="{{ url_for('static', filename='assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
+
+    <!-- Datatable init js -->
+    <script src="{{ url_for('static', filename='assets/js/pages/datatables.init.js') }}"></script>
+
+    <!-- App js -->
+    <script src="{{ url_for('static', filename='assets/js/app.js') }}"></script>
+</body>
+
+</html>

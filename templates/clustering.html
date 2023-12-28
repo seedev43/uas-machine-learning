@@ -1,0 +1,131 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Klasifikasi{% endblock %}
+
+{% block content %}
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Clustering Data Bank Customer Segmentation</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item active">Clustering</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <!-- start row -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-title">
+                                Clustering the Bank Customer Segmentation dataset using the K Means algorithm
+                            </p>
+                            <div class="form-group mb-4">
+                                <button class="btn btn-primary" type="button" onclick="generateRandomNumber()">Generate
+                                    random data</button>
+                            </div>
+                            <form id="myForm" method="post" action="{{ url_for('clustering') }}">
+                                <div class="input-group mb-3">
+                                    <input type="number" min="0" max="1" step="0.001" name="recency"
+                                        class="form-control" placeholder="recency" required>
+                                    <input type="number" min="0" max="1" step="0.001" name="frequency"
+                                        class="form-control" placeholder="frequency" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input type="number" min="0" max="1" step="0.001" name="monetary"
+                                        class="form-control" placeholder="monetary" required>
+                                </div>
+
+                                <div class="d-grid mt-3 mb-2">
+                                    <button type="submit"
+                                        class="btn btn-primary waves-effect waves-light">Submit</button>
+                                </div>
+                            </form>
+
+                            <p class="card-title-desc">
+                                <b>Information:</b><br>
+                                Enter data in decimal form, example: 0.123<br>
+                            </p>
+                            
+                            {% if data %}
+                            <h3>
+                                <b>Result: <br>
+                                    N Cluster: {{ data.n_cluster }} <br>
+                                    Cluster Followed: {{ data.cluster[0] + 1 }} <br>
+                                    Inertia: {{ data.inertia }} <br>
+
+                                </b>
+                            </h3>
+                            <p class="card-title mt-3">Input value</p>
+                            <div class="table-responsive">
+                                <table class="table table-striped mb-0">
+
+                                    <thead>
+                                        <tr>
+                                            <th>Recency</th>
+                                            <th>Frequency</th>
+                                            <th>Monetary</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for value in data.inputs %}
+                                        <tr>
+                                            <td>{{ value[0] }}</td>
+                                            <td>{{ value[1] }}</td>
+                                            <td>{{ value[2] }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        
+                            <p class="card-title mt-3">value of the last centroid</p>
+                            <div class="table-responsive">
+                                <table class="table table-striped mb-0">
+
+                                    <thead>
+                                        <tr>
+                                            <th>Cluster</th>
+                                            <th>Recency</th>
+                                            <th>Frequency</th>
+                                            <th>Monetary</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for key, centroid in data.centroids %}
+                                        <tr>
+                                            <th scope="row">{{ key + 1 }}</th>
+                                            <td>{{ centroid[key] }}</td>
+                                            <td>{{ centroid[key] }}</td>
+                                            <td>{{ centroid[key] }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% endif %}
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+            
+            {% endblock %}

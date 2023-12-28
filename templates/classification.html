@@ -1,0 +1,137 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Klasifikasi{% endblock %}
+
+{% block content %}
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Water Potability Classification</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item active">Classification</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <!-- start row -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-title">
+                                Water Potability dataset classification using the KNNeighbours algorithm
+                            </p>
+                            <div class="form-group mb-4">
+                                <button class="btn btn-primary" type="button" onclick="generateRandomNumber()">Generate
+                                    random data</button>
+                            </div>
+                            <form id="myForm" method="post" action="{{ url_for('classification') }}">
+
+                                <div class="input-group mb-3">
+                                    <input type="number" min="0" max="1" step="0.001" name="ph" class="form-control"
+                                        placeholder="ph" required>
+                                    <input type="number" min="0" max="1" step="0.001" name="hardness"
+                                        class="form-control" placeholder="hardness" required>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="number" min="0" max="1" step="0.001" name="solids" class="form-control"
+                                        placeholder="solids" required>
+                                    <input type="number" min="0" max="1" step="0.001" name="chloramines"
+                                        class="form-control" placeholder="chloramines" required>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="number" min="0" max="1" step="0.001" name="sulfate"
+                                        class="form-control" placeholder="sulfate" required>
+                                    <input type="number" min="0" max="1" step="0.001" name="conductivity"
+                                        class="form-control" placeholder="conductivity" required>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="number" min="0" max="1" step="0.001" name="organic_carbon"
+                                        class="form-control" placeholder="organic_carbon" required>
+                                    <input type="number" min="0" max="1" step="0.001" name="trihalomethanes"
+                                        class="form-control" placeholder="trihalomethanes" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input type="number" min="0" max="1" step="0.001" name="turbidity"
+                                        class="form-control" placeholder="turbidity" required>
+                                </div>
+
+                                <div class="d-grid mt-3 mb-2">
+                                    <button type="submit"
+                                        class="btn btn-primary waves-effect waves-light">Submit</button>
+                                </div>
+                            </form>
+
+                            <p class="card-title-desc">
+                                <b>Information:</b><br>
+                                Data input is decimal, for example: 0.123<br>
+                                Potability Status:<br>
+                                0 means false (the water is not suitable for drinking)<br>
+                                1 means true (water is suitable for drinking)<br>
+                            </p>
+                            {% if data %}
+                            <h3>
+                                <b>Result: <br>
+                                    K Parameter: {{ data.k_params }}<br>
+                                    Potability Status: {{ data.predict }}
+                                </b>
+                            </h3>
+                            <div class="table-responsive">
+                                <table class="table table-striped mb-0">
+
+                                    <thead>
+                                        <tr>
+                                            <th>Potability</th>
+                                            <th>ph</th>
+                                            <th>hardness</th>
+                                            <th>solids</th>
+                                            <th>chloramines</th>
+                                            <th>sulfate</th>
+                                            <th>conductivity</th>
+                                            <th>organic carbon</th>
+                                            <th>trihalomethanes</th>
+                                            <th>turbidity</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">{{ data.predict }}</th>
+                                            {% for value in data.inputs %}
+                                            <td>{{ value[0] }}</td>
+                                            <td>{{ value[1] }}</td>
+                                            <td>{{ value[2] }}</td>
+                                            <td>{{ value[3] }}</td>
+                                            <td>{{ value[4] }}</td>
+                                            <td>{{ value[5] }}</td>
+                                            <td>{{ value[6] }}</td>
+                                            <td>{{ value[7] }}</td>
+                                            <td>{{ value[8] }}</td>
+                                            {% endfor %}
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% endif %}
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+            {% endblock %}
