@@ -1,11 +1,12 @@
 from flask import Flask, render_template, request
 from datetime import datetime
 import pickle
+import pytz
 import numpy as np
 
 # load file pickle nya
-classificationPickle = './water_potability.pkl'
-clusteringPickle = './bank_transaction.pkl'
+classificationPickle = './models/water_potability.pkl'
+clusteringPickle = './models/bank_transaction.pkl'
 with open(classificationPickle, 'rb') as file:
     classModel = pickle.load(file)
     print(f"File {classificationPickle} loaded!")
@@ -18,11 +19,22 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET'])
 def index():
+    currentTime = datetime.now()
+    # Mendefinisikan zona waktu awal (misalnya UTC)
+    original_timezone = pytz.UTC
+
+    # Mendefinisikan zona waktu baru 
+    new_timezone = pytz.timezone('Asia/Jakarta')
+
+    # Mengonversi waktu ke zona waktu baru
+    current_time = original_timezone.localize(current_time)
+    current_time = current_time.astimezone(new_timezone)
+
     datas = {
         # Mendapatkan alamat IP pengguna
         'user_ip' : request.headers.get('X-Forwarded-For', request.remote_addr),
-        'ip': request.remote_addr,
-        'time': datetime.now().strftime('%H:%M:%S')
+        'date': current_time.strftime('%d-%m-%Y'),
+        'time': current_time.strftime('%H:%M:%S')
     }
     return render_template('index.html', data=datas)
 
