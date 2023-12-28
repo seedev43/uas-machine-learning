@@ -27,14 +27,14 @@ def index():
     new_timezone = pytz.timezone('Asia/Jakarta')
 
     # Mengonversi waktu ke zona waktu baru
-    current_time = original_timezone.localize(current_time)
-    current_time = current_time.astimezone(new_timezone)
+    originalTimezone = original_timezone.localize(current_time)
+    timeNow = originalTimezone.astimezone(new_timezone)
 
     datas = {
         # Mendapatkan alamat IP pengguna
         'user_ip' : request.headers.get('X-Forwarded-For', request.remote_addr),
-        'date': current_time.strftime('%d-%m-%Y'),
-        'time': current_time.strftime('%H:%M:%S')
+        'date': timeNow.strftime('%d-%m-%Y'),
+        'time': timeNow.strftime('%H:%M:%S')
     }
     return render_template('index.html', data=datas)
 
