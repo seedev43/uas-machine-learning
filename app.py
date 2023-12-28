@@ -19,7 +19,7 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET'])
 def index():
-    currentTime = datetime.now()
+    current_time = datetime.now()
     # Mendefinisikan zona waktu awal (misalnya UTC)
     original_timezone = pytz.UTC
 
@@ -28,13 +28,13 @@ def index():
 
     # Mengonversi waktu ke zona waktu baru
     originalTimezone = original_timezone.localize(current_time)
-    timeNow = originalTimezone.astimezone(new_timezone)
+    timeNow = current_time.astimezone(new_timezone)
 
     datas = {
         # Mendapatkan alamat IP pengguna
         'user_ip' : request.headers.get('X-Forwarded-For', request.remote_addr),
-        'date': timeNow.strftime('%d-%m-%Y'),
-        'time': timeNow.strftime('%H:%M:%S')
+        'date': current_time.strftime('%d-%m-%Y'),
+        'time': current_time.strftime('%H:%M:%S')
     }
     return render_template('index.html', data=datas)
 
