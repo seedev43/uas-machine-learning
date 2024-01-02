@@ -11,9 +11,6 @@ original_timezone = pytz.UTC
 # Mendefinisikan zona waktu baru 
 new_timezone = pytz.timezone('Asia/Jakarta')
 
-# Mengonversi waktu ke zona waktu baru
-originalTimezone = original_timezone.localize(current_time)
-timeNow = originalTimezone.astimezone(new_timezone)
 
 # load file pickle nya
 classificationPickle = './models/water_potability.pkl'
@@ -30,13 +27,14 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET'])
 def index():
-    
-
+    # Mengonversi waktu ke zona waktu baru
+    originalTimezone = original_timezone.localize(current_time)
+    timeNow = originalTimezone.astimezone(new_timezone)
     datas = {
         # Mendapatkan alamat IP pengguna
         'user_ip' : request.headers.get('X-Forwarded-For', request.remote_addr),
         'date': current_time.strftime('%d-%m-%Y'),
-        'time': new_timezone.localize(current_time).strftime('%H:%M:%S')
+        'time': current_time.strftime('%H:%M:%s')
     }
     return render_template('index.html', data=datas)
 
