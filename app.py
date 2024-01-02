@@ -34,7 +34,7 @@ def index():
         # Mendapatkan alamat IP pengguna
         'user_ip' : request.headers.get('X-Forwarded-For', request.remote_addr),
         'date': current_time.strftime('%d-%m-%Y'),
-        'time': current_time.strftime('%H:%M:%S')
+        'time': new_timezone.localize(current_time).strftime('%H:%M:%S')
     }
     return render_template('index.html', data=datas)
 
