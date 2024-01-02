@@ -88,7 +88,8 @@
                             <h3>
                                 <b>Result: <br>
                                     K Parameter: {{ data.k_params }}<br>
-                                    Potability Status: {{ data.predict }}
+                                    Potability: {{ data.predict }}<br>
+                                    Potability Status: {{ "water is suitable for drinking" if data.predict else "water is not suitable for drinking"}}
                                 </b>
                             </h3>
                             <div class="table-responsive">
