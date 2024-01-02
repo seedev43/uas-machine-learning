@@ -4,6 +4,17 @@ import pickle
 import pytz
 import numpy as np
 
+current_time = datetime.now()
+# Mendefinisikan zona waktu awal (misalnya UTC)
+original_timezone = pytz.UTC
+
+# Mendefinisikan zona waktu baru 
+new_timezone = pytz.timezone('Asia/Jakarta')
+
+# Mengonversi waktu ke zona waktu baru
+originalTimezone = original_timezone.localize(current_time)
+timeNow = originalTimezone.astimezone(new_timezone)
+
 # load file pickle nya
 classificationPickle = './models/water_potability.pkl'
 clusteringPickle = './models/bank_transaction.pkl'
@@ -19,16 +30,7 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET'])
 def index():
-    current_time = datetime.now()
-    # Mendefinisikan zona waktu awal (misalnya UTC)
-    original_timezone = pytz.UTC
-
-    # Mendefinisikan zona waktu baru 
-    new_timezone = pytz.timezone('Asia/Jakarta')
-
-    # Mengonversi waktu ke zona waktu baru
-    originalTimezone = original_timezone.localize(current_time)
-    timeNow = originalTimezone.astimezone(new_timezone)
+    
 
     datas = {
         # Mendapatkan alamat IP pengguna
