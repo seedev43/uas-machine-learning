@@ -42,9 +42,6 @@ def index():
 def classification():
     if request.method == "GET":
         return render_template('classification.html')
-    # k = request.form['k_params']
-    # if k != "":
-    #     classModel.n_neighbors = int(k)
     # mengambil semua value dari form input html
     values = [float(x) for x in request.form.values()]
     # masukkan value tadi ke array
@@ -62,14 +59,14 @@ def classification():
 def clustering():
     if request.method == "GET":
         return render_template('clustering.html')
-    # k = request.form['k_params']
-    # if k != "":
-    #     clusterModel.n_clusters = int(k)
     # mengambil semua value dari form input html
     values = [float(x) for x in request.form.values()]
     # masukkan value tadi ke array
     array_values = [np.array(values)]
     prediction = clusterModel.predict(array_values)
+    print(enumerate(clusterModel.cluster_centers_))
+    print(clusterModel.cluster_centers_[0])
+    
     datas = {
         'inputs': array_values,
         'n_cluster': int(clusterModel.n_clusters),

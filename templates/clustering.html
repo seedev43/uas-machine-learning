@@ -108,12 +108,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for key, centroid in data.centroids %}
+                                        {% for i, row in data.centroids %}
                                         <tr>
-                                            <th scope="row">{{ key + 1 }}</th>
-                                            <td>{{ centroid[key] }}</td>
-                                            <td>{{ centroid[key] }}</td>
-                                            <td>{{ centroid[key] }}</td>
+                                            <th scope="row">{{ i + 1 }}</th>
+                                            {% for value in row %}
+                                            <td>{{ value }}</td>
+                                            {% endfor %}
                                         </tr>
                                         {% endfor %}
                                     </tbody>
